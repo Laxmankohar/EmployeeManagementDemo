@@ -3,16 +3,7 @@ import mongoose, { isValidObjectId } from "mongoose";
 
 const AddEmployee = async (req, res) => {
   try {
-    const { name, email, phonenumber, address, city, state } = req.body;
-    // console.log(req.body);
-
-    if (!name || !email || !phonenumber || !address || !city || !state) {
-      res.status(400).json({
-        success: false,
-        message: "Please fill all the fields",
-      });
-    }
-
+    
     const existingEmployee = await Employee.findOne({ email: email });
 
     if (existingEmployee) {
@@ -22,6 +13,16 @@ const AddEmployee = async (req, res) => {
       });
     } else {
       const newEmployee = new Employee(req.body);
+
+      // const newEmployee = new Employee({
+      //   name:"Rajesh",
+      //   email:"rajesh@gmail.com",
+      //   phonenumber:"12246768",
+      //   address:"Madhapur",
+      //   city:"Hyderabad",
+      //   state:"Telangana"
+      // })
+
       const savedEmployee = await newEmployee.save();
       res.status(201).json(savedEmployee);
     }
@@ -118,6 +119,7 @@ const DeleteEmployee = async (req, res) => {
 
     res.status(200).json({
       success: true,
+      deletedEmployee,
       message: "Employee deleted successfully",
     });
   } catch (err) {
