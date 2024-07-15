@@ -18,4 +18,4 @@ connectDB()
 
 // import routes
 import employeeRoutes from './Routes/employee.routes.js';
-app.use('/api/v1', employeeRoutes);
+app.use('/api/v1/employees', employeeRoutes);
