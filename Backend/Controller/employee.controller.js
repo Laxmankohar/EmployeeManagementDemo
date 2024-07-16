@@ -1,5 +1,5 @@
 import Employee from "../Model/employee.models.js";
-import mongoose, { isValidObjectId } from "mongoose";
+import { isValidObjectId } from "mongoose";
 
 const AddEmployee = async (req, res) => {
   try {
