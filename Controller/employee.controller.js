@@ -3,7 +3,7 @@ import mongoose, { isValidObjectId } from "mongoose";
 
 const AddEmployee = async (req, res) => {
   try {
-    
+    const{email} = req.body
     const existingEmployee = await Employee.findOne({ email: email });
 
     if (existingEmployee) {
@@ -13,16 +13,6 @@ const AddEmployee = async (req, res) => {
       });
     } else {
       const newEmployee = new Employee(req.body);
-
-      // const newEmployee = new Employee({
-      //   name:"Rajesh",
-      //   email:"rajesh@gmail.com",
-      //   phonenumber:"12246768",
-      //   address:"Madhapur",
-      //   city:"Hyderabad",
-      //   state:"Telangana"
-      // })
-
       const savedEmployee = await newEmployee.save();
       res.status(201).json(savedEmployee);
     }
