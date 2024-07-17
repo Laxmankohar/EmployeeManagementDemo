@@ -14,7 +14,9 @@ const AddEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({ type: ADD_EMPLOYEE_REQUEST, payload: { name, email, phonenumber, address,city, state} });
+        const payload = { name, email, phonenumber, address, city, state };
+        console.log('Dispatching payload:', payload);
+        dispatch({ type: ADD_EMPLOYEE_REQUEST, payload });
         setName('');
         setEmail('');
         setPhonenumber('');
@@ -37,6 +39,10 @@ const AddEmployee = () => {
             <div>
                 <label>Phonenumber</label>
                 <input type='number' value={phonenumber} onChange={(e) => setPhonenumber(e.target.value)} />
+            </div>
+            <div>
+                <label>Address</label>
+                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
             </div>
             <div>
                 <label>City</label>

@@ -4,6 +4,7 @@ import { FETCH_EMPLOYEES_REQUEST, DELETE_EMPLOYEE_REQUEST } from '../actions/act
 
 const EmployeeList = () => {
     const dispatch = useDispatch();
+    // const employees = useSelector(state => state.employees);
     const employees = useSelector((state) => state.employees.employees);
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const EmployeeList = () => {
             <ul>
                 {employees.map((employee) => (
                     <li key={employee._id}>
-                        {employee.name} - {employee.position}
+                        {employee.name} - {employee.email}
                         <button onClick={() => handleDelete(employee._id)}>Delete</button>
                     </li>
                 ))}

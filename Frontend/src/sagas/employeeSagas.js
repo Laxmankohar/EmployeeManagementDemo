@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
     FETCH_EMPLOYEES_FAILURE,
     FETCH_EMPLOYEES_SUCCESS,
@@ -17,7 +18,8 @@ import {call, put,takeLatest} from 'redux-saga/effects'
 
 function* fetchEmployees() {
     try {
-        const response = yield call(api.get, '/getEmployee')
+        const response = yield call(axios.get, 'http://localhost:5001/api/v1/employees/getEmployee')
+        console.log(response);
         yield put({ type: FETCH_EMPLOYEES_SUCCESS, payload: response.data })
     } catch (error) {
         yield put({ type: FETCH_EMPLOYEES_FAILURE, payload: error })
@@ -28,7 +30,7 @@ function* fetchEmployees() {
 
 function* addEmployee(action){
     try{
-        const response = yield call(api.post,'/addEmployee', action.payload)
+        const response = yield call(axios.post,'http://localhost:5001/api/v1/employees/addEmployee', action.payload)
         yield put({type:ADD_EMPLOYEE_SUCCESS, payload:response.data})
 
     }catch(error){
@@ -38,7 +40,8 @@ function* addEmployee(action){
 
 function* updateEmployee(action){
     try {
-        const response = yield call(api.patch, `/updateEmployee/${action.payload._id}`, action.payload)
+        // const { id, data } = action.payload;
+        const response = yield call(axios.patch, `http://localhost:5001/api/v1/employees/updateEmployee/${action.payload.id}`, action.payload)
         yield put({type:UPDATE_EMPLOYEE_SUCCESS, payload:response.data})
         
     } catch (error) {
@@ -48,7 +51,7 @@ function* updateEmployee(action){
 
 function* deleteEmployee(action){
     try {
-        const response = yield call(api.delete, `/${action.payload._id}`, action.payload)
+        const response = yield call(axios.delete, `http://localhost:5001/api/v1/employees/deleteEmployee/${action.payload}`, action.payload)
             yield put({type:DELETE_EMPLOYEE_SUCCESS, payload:response.data}) 
         
     } catch (error) {

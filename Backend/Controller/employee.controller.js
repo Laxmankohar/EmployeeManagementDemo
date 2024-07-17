@@ -4,6 +4,7 @@ import { isValidObjectId } from "mongoose";
 const AddEmployee = async (req, res) => {
   try {
     const{email} = req.body
+    console.log(req.body);
     const existingEmployee = await Employee.findOne({ email: email });
 
     if (existingEmployee) {
