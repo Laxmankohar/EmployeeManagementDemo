@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FETCH_EMPLOYEES_REQUEST, DELETE_EMPLOYEE_REQUEST } from '../actions/actionTypes';
 
@@ -17,6 +17,7 @@ const EmployeeList = () => {
     return (
         <div>
             <h2>Employee List</h2>
+
             <ul>
                 {employees.map((employee) => (
                     <li key={employee._id}>
@@ -25,6 +26,7 @@ const EmployeeList = () => {
                     </li>
                 ))}
             </ul>
+
         </div>
     );
 };

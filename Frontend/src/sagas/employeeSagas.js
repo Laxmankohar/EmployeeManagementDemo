@@ -13,10 +13,11 @@ import {
     UPDATE_EMPLOYEE_REQUEST
 } from '../actions/actionTypes.js'
 import api from '../services/api.js'
+import {call, put,takeLatest} from 'redux-saga/effects'
 
 function* fetchEmployees() {
     try {
-        const response = yield call(api.get)
+        const response = yield call(api.get, '/getEmployee')
         yield put({ type: FETCH_EMPLOYEES_SUCCESS, payload: response.data })
     } catch (error) {
         yield put({ type: FETCH_EMPLOYEES_FAILURE, payload: error })
@@ -27,7 +28,7 @@ function* fetchEmployees() {
 
 function* addEmployee(action){
     try{
-        const response = yield call(api.post,'/', action.payload)
+        const response = yield call(api.post,'/addEmployee', action.payload)
         yield put({type:ADD_EMPLOYEE_SUCCESS, payload:response.data})
 
     }catch(error){
@@ -37,7 +38,7 @@ function* addEmployee(action){
 
 function* updateEmployee(action){
     try {
-        const response = yield call(api.patch, `/${action.payload._id}`, action.payload)
+        const response = yield call(api.patch, `/updateEmployee/${action.payload._id}`, action.payload)
         yield put({type:UPDATE_EMPLOYEE_SUCCESS, payload:response.data})
         
     } catch (error) {
@@ -45,7 +46,7 @@ function* updateEmployee(action){
     }
 }
 
-function* deleteEmployee(){
+function* deleteEmployee(action){
     try {
         const response = yield call(api.delete, `/${action.payload._id}`, action.payload)
             yield put({type:DELETE_EMPLOYEE_SUCCESS, payload:response.data}) 
