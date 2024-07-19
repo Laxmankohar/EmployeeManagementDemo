@@ -13,7 +13,7 @@ import {
     UPDATE_EMPLOYEE_SUCCESS,
     UPDATE_EMPLOYEE_REQUEST
 } from '../actions/actionTypes.js'
-import api from '../services/api.js'
+// import api from '../services/api.js'
 import {call, put,takeLatest} from 'redux-saga/effects'
 
 function* fetchEmployees() {

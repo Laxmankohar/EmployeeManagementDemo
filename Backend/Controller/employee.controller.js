@@ -5,7 +5,7 @@ const AddEmployee = async (req, res) => {
   try {
     const{email} = req.body
     console.log(req.body);
-    const existingEmployee = await Employee.findOne({ email: email });
+    const existingEmployee = await Employee.findOne({ email: email }).select('_id');
 
     if (existingEmployee) {
       return res.status(400).json({
@@ -24,7 +24,7 @@ const AddEmployee = async (req, res) => {
 
 const GetEmployee = async (req, res) => {
   try {
-    const employees = await Employee.find();
+    const employees = await Employee.find().select('_id');
     res.status(200).json(employees);
 
     if (!employees) {
