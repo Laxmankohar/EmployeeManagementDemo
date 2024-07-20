@@ -4,7 +4,6 @@ import { FETCH_EMPLOYEES_REQUEST, DELETE_EMPLOYEE_REQUEST } from '../actions/act
 
 const EmployeeList = () => {
     const dispatch = useDispatch();
-    // const employees = useSelector(state => state.employees);
     const employees = useSelector((state) => state.employees.employees);
 
     useEffect(() => {
